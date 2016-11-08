@@ -12,17 +12,17 @@ import com.fasterxml.aalto.stax.InputFactoryImpl;
 public class TestAsyncUsingWrapper {
 
     private void execute(String xmlFileName) throws Exception {
-        try{
+        try {
             InputStream xmlInputStream = new FileInputStream(xmlFileName);
             String xmlString = getStringFromInputStream(xmlInputStream);
 
             AsyncXMLInputFactory xmlInputFactory = new InputFactoryImpl();
             AsyncXMLStreamReader asyncXMLStreamReader = xmlInputFactory.createAsyncForByteArray();
 
-            AsyncReaderWrapper wrapper = new AsyncReaderWrapperForByteArray(asyncXMLStreamReader,1, xmlString);
+            AsyncReaderWrapper wrapper = new AsyncReaderWrapperForByteArray(asyncXMLStreamReader, 1, xmlString);
 
             int type = wrapper.nextToken();
-            while(type != XMLEvent.END_DOCUMENT) {
+            while (type != XMLEvent.END_DOCUMENT) {
                 switch (type) {
                     case XMLEvent.START_DOCUMENT:
                         System.out.println("start document");
@@ -47,8 +47,7 @@ public class TestAsyncUsingWrapper {
             asyncXMLStreamReader.close();
 
 
-
-        } catch(RuntimeException t) {
+        } catch (RuntimeException t) {
             t.printStackTrace();
         }
 
@@ -82,8 +81,6 @@ public class TestAsyncUsingWrapper {
         return sb.toString();
 
     }
-
-
 
 
     public static void main(String[] args) throws Exception {

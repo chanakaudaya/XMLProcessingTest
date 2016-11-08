@@ -36,8 +36,6 @@ import org.codehaus.stax2.XMLStreamReader2;
 import static org.junit.Assert.assertEquals;
 
 
-
-
 public class TestXMLProcessingPerf {
 
     private String filename = "test3.xml";
@@ -45,7 +43,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testUnMarshallUsingJAXB() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             JAXBContext jc = JAXBContext.newInstance(PersonList.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             PersonList obj = (PersonList) unmarshaller.unmarshal(new File(filename));
@@ -59,7 +57,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testUnMarshallUsingJAXBStreamSource() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             JAXBContext jc = JAXBContext.newInstance(PersonList.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
             StreamSource source = new StreamSource(new File(filename));
@@ -72,7 +70,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testUnMarshallingWithStAX() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             FileReader fr = new FileReader(filename);
             JAXBContext jc = JAXBContext.newInstance(PersonList.class);
             Unmarshaller unmarshaller = jc.createUnmarshaller();
@@ -87,7 +85,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testParsingWithDom() throws Exception {
-        for(int j=0; j<repeatCount; j++) {
+        for (int j = 0; j < repeatCount; j++) {
             DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = domFactory.newDocumentBuilder();
             Document doc = builder.parse(filename);
@@ -106,7 +104,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testParsingWithSAX() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             final List<Person> persons = new ArrayList<Person>();
@@ -150,7 +148,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testAaltoSAXParsing() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             //InputStream xmlInputStream = getClass().getResourceAsStream(xmlFileName);
             InputStream xmlInputStream = new FileInputStream(filename);
             //Load Aalto's StAX parser factory
@@ -178,12 +176,11 @@ public class TestXMLProcessingPerf {
         }
 
 
-
     }
 
     @Test
     public void testAxiomParserFull() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             StAXOMBuilder staxBuilder = new StAXOMBuilder(new FileInputStream(filename));
 
 
@@ -200,7 +197,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testAxiomParserWithFragements() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             // Create a builder for the file and get the root element
             InputStream in = new FileInputStream(filename);
             // Create an XMLStreamReader without building the object model
@@ -230,8 +227,8 @@ public class TestXMLProcessingPerf {
     }
 
     private void processFragment(OMElement element) {
-        OMElement el1 = (OMElement)element.getChildrenWithLocalName("id").next();
-        OMElement el2 = (OMElement)element.getChildrenWithLocalName("name").next();
+        OMElement el1 = (OMElement) element.getChildrenWithLocalName("id").next();
+        OMElement el2 = (OMElement) element.getChildrenWithLocalName("name").next();
         System.out.println(el1.getText() +
                 " - " + el2.getText());
 
@@ -239,7 +236,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testAsyncUsingWrapperAalto() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             try {
                 InputStream xmlInputStream = new FileInputStream(filename);
                 String xmlString = getStringFromInputStream(xmlInputStream);
@@ -317,7 +314,7 @@ public class TestXMLProcessingPerf {
 
     @Test
     public void testBasicStaxParsing() throws Exception {
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
             //InputStream xmlInputStream = getClass().getResourceAsStream(xmlFileName);
             InputStream xmlInputStream = new FileInputStream(filename);
             //Load Aalto's StAX parser factory

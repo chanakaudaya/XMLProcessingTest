@@ -10,8 +10,7 @@ import java.nio.ByteBuffer;
 /**
  * Helper class used with async parser
  */
-public class AsyncReaderWrapperForByteBuffer implements AsyncReaderWrapper
-{
+public class AsyncReaderWrapperForByteBuffer implements AsyncReaderWrapper {
     private final AsyncXMLStreamReader<AsyncByteBufferFeeder> _streamReader;
 
     private final byte[] _xml;
@@ -24,9 +23,8 @@ public class AsyncReaderWrapperForByteBuffer implements AsyncReaderWrapper
     public AsyncReaderWrapperForByteBuffer(AsyncXMLStreamReader<AsyncByteBufferFeeder> sr, String xmlString) {
         this(sr, 1, xmlString);
     }
-    
-    public AsyncReaderWrapperForByteBuffer(AsyncXMLStreamReader<AsyncByteBufferFeeder> sr, int bytesPerCall, String xmlString)
-    {
+
+    public AsyncReaderWrapperForByteBuffer(AsyncXMLStreamReader<AsyncByteBufferFeeder> sr, int bytesPerCall, String xmlString) {
         _streamReader = sr;
         _bytesPerFeed = bytesPerCall;
         try {
@@ -48,10 +46,9 @@ public class AsyncReaderWrapperForByteBuffer implements AsyncReaderWrapper
     }
 
     @Override
-    public int nextToken() throws XMLStreamException
-    {
+    public int nextToken() throws XMLStreamException {
         int token;
-        
+
         while ((token = _streamReader.next()) == AsyncXMLStreamReader.EVENT_INCOMPLETE) {
             _buf.clear();
             AsyncByteBufferFeeder feeder = _streamReader.getInputFeeder();

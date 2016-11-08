@@ -15,13 +15,13 @@ import java.util.List;
 public class TestJaxenXPath {
 
     @Test
-    public void testXPath() throws Exception{
+    public void testXPath() throws Exception {
 
         String filename = "test3.xml";
         String xpathSt = "//persons/person[100]/id";
         int repeatCount = 10;
 
-        for(int i=0; i<repeatCount; i++) {
+        for (int i = 0; i < repeatCount; i++) {
 
             File xmlFile = new File(filename);
             SAXReader reader = new SAXReader();

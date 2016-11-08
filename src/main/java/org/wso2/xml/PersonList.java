@@ -10,7 +10,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "persons")
 public class PersonList {
-    @XmlElement(name="person")
+    @XmlElement(name = "person")
     private List<Person> personList = new ArrayList<Person>();
 
     public List<Person> getPersons() {

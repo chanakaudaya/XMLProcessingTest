@@ -9,8 +9,7 @@ import java.io.IOException;
 /**
  * Helper class used with async parser
  */
-public class AsyncReaderWrapperForByteArray implements AsyncReaderWrapper
-{
+public class AsyncReaderWrapperForByteArray implements AsyncReaderWrapper {
     private final AsyncXMLStreamReader<AsyncByteArrayFeeder> _streamReader;
     private final byte[] _xml;
     private final int _bytesPerFeed;
@@ -19,9 +18,8 @@ public class AsyncReaderWrapperForByteArray implements AsyncReaderWrapper
     public AsyncReaderWrapperForByteArray(AsyncXMLStreamReader<AsyncByteArrayFeeder> sr, String xmlString) {
         this(sr, 1, xmlString);
     }
-    
-    public AsyncReaderWrapperForByteArray(AsyncXMLStreamReader<AsyncByteArrayFeeder> sr, int bytesPerCall, String xmlString)
-    {
+
+    public AsyncReaderWrapperForByteArray(AsyncXMLStreamReader<AsyncByteArrayFeeder> sr, int bytesPerCall, String xmlString) {
         _streamReader = sr;
         _bytesPerFeed = bytesPerCall;
         try {
@@ -42,10 +40,9 @@ public class AsyncReaderWrapperForByteArray implements AsyncReaderWrapper
     }
 
     @Override
-    public int nextToken() throws XMLStreamException
-    {
+    public int nextToken() throws XMLStreamException {
         int token;
-        
+
         while ((token = _streamReader.next()) == AsyncXMLStreamReader.EVENT_INCOMPLETE) {
             AsyncByteArrayFeeder feeder = _streamReader.getInputFeeder();
             if (!feeder.needMoreInput()) {
