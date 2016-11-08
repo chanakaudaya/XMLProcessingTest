@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="stax-api-1.0.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../aalto-xml/lib/stax-api-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../aalto-xml/lib/stax2-api-3.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
