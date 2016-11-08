@@ -19,7 +19,8 @@ public class AsyncReaderWrapperForByteArray implements AsyncReaderWrapper {
         this(sr, 1, xmlString);
     }
 
-    public AsyncReaderWrapperForByteArray(AsyncXMLStreamReader<AsyncByteArrayFeeder> sr, int bytesPerCall, String xmlString) {
+    public AsyncReaderWrapperForByteArray(AsyncXMLStreamReader<AsyncByteArrayFeeder> sr, int bytesPerCall,
+                                          String xmlString) {
         _streamReader = sr;
         _bytesPerFeed = bytesPerCall;
         try {

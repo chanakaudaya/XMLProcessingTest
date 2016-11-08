@@ -1,15 +1,21 @@
 package org.wso2.xml;
 
-import java.io.*;
-
-
-import javax.xml.stream.events.XMLEvent;
-
 import com.fasterxml.aalto.AsyncXMLInputFactory;
 import com.fasterxml.aalto.AsyncXMLStreamReader;
 import com.fasterxml.aalto.stax.InputFactoryImpl;
 
+import javax.xml.stream.events.XMLEvent;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class TestAsyncUsingWrapper {
+
+    public static void main(String[] args) throws Exception {
+        (new TestAsyncUsingWrapper()).execute("test.xml");
+    }
 
     private void execute(String xmlFileName) throws Exception {
         try {
@@ -80,11 +86,6 @@ public class TestAsyncUsingWrapper {
 
         return sb.toString();
 
-    }
-
-
-    public static void main(String[] args) throws Exception {
-        (new TestAsyncUsingWrapper()).execute("test.xml");
     }
 
 }

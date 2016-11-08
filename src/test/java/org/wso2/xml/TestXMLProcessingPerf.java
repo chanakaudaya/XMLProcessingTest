@@ -6,11 +6,12 @@ import com.fasterxml.aalto.stax.InputFactoryImpl;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMXMLBuilderFactory;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.codehaus.stax2.XMLInputFactory2;
+import org.codehaus.stax2.XMLStreamReader2;
 import org.junit.Test;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -24,16 +25,18 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
-import javax.xml.transform.stream.StreamSource;
-import java.io.*;
-import java.util.*;
-
 import javax.xml.stream.events.XMLEvent;
-
-import org.codehaus.stax2.XMLInputFactory2;
-import org.codehaus.stax2.XMLStreamReader2;
-
-import static org.junit.Assert.assertEquals;
+import javax.xml.transform.stream.StreamSource;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class TestXMLProcessingPerf {
@@ -112,7 +115,8 @@ public class TestXMLProcessingPerf {
                 boolean bpersonId = false;
                 boolean bpersonName = false;
 
-                public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+                public void startElement(String uri, String localName, String qName, Attributes attributes)
+                        throws SAXException {
                     if (qName.equalsIgnoreCase("id")) {
                         bpersonId = true;
                         Person person = new Person();
@@ -152,7 +156,9 @@ public class TestXMLProcessingPerf {
             //InputStream xmlInputStream = getClass().getResourceAsStream(xmlFileName);
             InputStream xmlInputStream = new FileInputStream(filename);
             //Load Aalto's StAX parser factory
-            XMLInputFactory2 xmlInputFactory = (XMLInputFactory2) XMLInputFactory.newFactory("javax.xml.stream.XMLInputFactory", this.getClass().getClassLoader());
+            XMLInputFactory2 xmlInputFactory =
+                    (XMLInputFactory2) XMLInputFactory.newFactory("javax.xml.stream.XMLInputFactory",
+                            this.getClass().getClassLoader());
             //XMLInputFactory2 xmlInputFactory = (XMLInputFactory2)XMLInputFactory.newInstance();
             xmlInputFactory.configureForSpeed();
             XMLStreamReader2 xmlStreamReader = (XMLStreamReader2) xmlInputFactory.createXMLStreamReader(xmlInputStream);
@@ -318,7 +324,9 @@ public class TestXMLProcessingPerf {
             //InputStream xmlInputStream = getClass().getResourceAsStream(xmlFileName);
             InputStream xmlInputStream = new FileInputStream(filename);
             //Load Aalto's StAX parser factory
-            XMLInputFactory2 xmlInputFactory = (XMLInputFactory2) XMLInputFactory.newFactory("javax.xml.stream.XMLInputFactory", this.getClass().getClassLoader());
+            XMLInputFactory2 xmlInputFactory =
+                    (XMLInputFactory2) XMLInputFactory.newFactory("javax.xml.stream.XMLInputFactory",
+                            this.getClass().getClassLoader());
             //XMLInputFactory2 xmlInputFactory = (XMLInputFactory2)XMLInputFactory.newInstance();
             XMLStreamReader2 xmlStreamReader = (XMLStreamReader2) xmlInputFactory.createXMLStreamReader(xmlInputStream);
             while (xmlStreamReader.hasNext()) {

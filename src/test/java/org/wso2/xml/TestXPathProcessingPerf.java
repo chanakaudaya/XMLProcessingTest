@@ -4,7 +4,11 @@ import net.sf.saxon.Configuration;
 import net.sf.saxon.lib.NamespaceConstant;
 import net.sf.saxon.om.DocumentInfo;
 import net.sf.saxon.om.NodeInfo;
-import net.sf.saxon.s9api.*;
+import net.sf.saxon.s9api.DocumentBuilder;
+import net.sf.saxon.s9api.Processor;
+import net.sf.saxon.s9api.XPathCompiler;
+import net.sf.saxon.s9api.XPathSelector;
+import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.xpath.XPathFactoryImpl;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
@@ -17,7 +21,12 @@ import org.xml.sax.InputSource;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.xpath.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import javax.xml.xpath.XPathFactoryConfigurationException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.StringReader;
@@ -63,7 +72,8 @@ public class TestXPathProcessingPerf {
     @Test
     public void testSaxonXPath() throws XPathFactoryConfigurationException, XPathExpressionException, Exception {
         for (int i = 0; i < iteration; i++) {
-            System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_SAXON, "net.sf.saxon.xpath.XPathFactoryImpl");
+            System.setProperty("javax.xml.xpath.XPathFactory:" +
+                    NamespaceConstant.OBJECT_MODEL_SAXON, "net.sf.saxon.xpath.XPathFactoryImpl");
             XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_SAXON);
             XPath xPath = xPathFactory.newXPath();
             InputSource inputSource = new InputSource(new File(filename).toURI().toString());
@@ -84,7 +94,8 @@ public class TestXPathProcessingPerf {
     @Test
     public void testSaxonXPathXOM() throws XPathFactoryConfigurationException, XPathExpressionException, Exception {
         for (int i = 0; i < iteration; i++) {
-            System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_XOM, "net.sf.saxon.xpath.XPathFactoryImpl");
+            System.setProperty("javax.xml.xpath.XPathFactory:" +
+                    NamespaceConstant.OBJECT_MODEL_XOM, "net.sf.saxon.xpath.XPathFactoryImpl");
             XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_XOM);
             XPath xPath = xPathFactory.newXPath();
             InputSource inputSource = new InputSource(new File(filename).toURI().toString());
@@ -105,7 +116,8 @@ public class TestXPathProcessingPerf {
     @Test
     public void testSaxonXPathDOM4J() throws XPathFactoryConfigurationException, XPathExpressionException, Exception {
         for (int i = 0; i < iteration; i++) {
-            System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_DOM4J, "net.sf.saxon.xpath.XPathFactoryImpl");
+            System.setProperty("javax.xml.xpath.XPathFactory:" +
+                    NamespaceConstant.OBJECT_MODEL_DOM4J, "net.sf.saxon.xpath.XPathFactoryImpl");
             XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_DOM4J);
             XPath xPath = xPathFactory.newXPath();
             InputSource inputSource = new InputSource(new File(filename).toURI().toString());
@@ -126,7 +138,8 @@ public class TestXPathProcessingPerf {
     @Test
     public void testSaxonXPathJDOM() throws XPathFactoryConfigurationException, XPathExpressionException, Exception {
         for (int i = 0; i < iteration; i++) {
-            System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_JDOM, "net.sf.saxon.xpath.XPathFactoryImpl");
+            System.setProperty("javax.xml.xpath.XPathFactory:" +
+                    NamespaceConstant.OBJECT_MODEL_JDOM, "net.sf.saxon.xpath.XPathFactoryImpl");
             XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_JDOM);
             XPath xPath = xPathFactory.newXPath();
             InputSource inputSource = new InputSource(new File(filename).toURI().toString());
@@ -147,7 +160,8 @@ public class TestXPathProcessingPerf {
     @Test
     public void testSaxonXPathAXIOM() throws XPathFactoryConfigurationException, XPathExpressionException, Exception {
         for (int i = 0; i < iteration; i++) {
-            System.setProperty("javax.xml.xpath.XPathFactory:" + NamespaceConstant.OBJECT_MODEL_AXIOM, "net.sf.saxon.xpath.XPathFactoryImpl");
+            System.setProperty("javax.xml.xpath.XPathFactory:" +
+                    NamespaceConstant.OBJECT_MODEL_AXIOM, "net.sf.saxon.xpath.XPathFactoryImpl");
             XPathFactory xPathFactory = XPathFactory.newInstance(NamespaceConstant.OBJECT_MODEL_AXIOM);
             XPath xPath = xPathFactory.newXPath();
             InputSource inputSource = new InputSource(new File(filename).toURI().toString());
@@ -167,7 +181,7 @@ public class TestXPathProcessingPerf {
 
     @Test
     public void testJavaXPath() throws Exception {
-        for(int i=0; i<iteration; i++) {
+        for (int i = 0; i < iteration; i++) {
             // 1. Instantiate an XPathFactory.
             javax.xml.xpath.XPathFactory factory =
                     javax.xml.xpath.XPathFactory.newInstance();
@@ -187,7 +201,7 @@ public class TestXPathProcessingPerf {
 
     @Test
     public void textXalanXPath() throws Exception {
-        for(int i=0; i<iteration; i++) {
+        for (int i = 0; i < iteration; i++) {
             DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
             javax.xml.parsers.DocumentBuilder builder = domFactory.newDocumentBuilder();
             Document document = builder.parse(filename);

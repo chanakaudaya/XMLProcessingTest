@@ -3,9 +3,9 @@ package org.wso2.xml;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.jaxen.XPath;
 import org.dom4j.io.SAXReader;
 import org.jaxen.JaxenException;
+import org.jaxen.XPath;
 import org.jaxen.dom4j.Dom4jXPath;
 import org.junit.Test;
 

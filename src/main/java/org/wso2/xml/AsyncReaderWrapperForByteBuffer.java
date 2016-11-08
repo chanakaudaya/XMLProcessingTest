@@ -16,15 +16,15 @@ public class AsyncReaderWrapperForByteBuffer implements AsyncReaderWrapper {
     private final byte[] _xml;
 
     private final int _bytesPerFeed;
-    private int _offset = 0;
-
     private final ByteBuffer _buf;
+    private int _offset = 0;
 
     public AsyncReaderWrapperForByteBuffer(AsyncXMLStreamReader<AsyncByteBufferFeeder> sr, String xmlString) {
         this(sr, 1, xmlString);
     }
 
-    public AsyncReaderWrapperForByteBuffer(AsyncXMLStreamReader<AsyncByteBufferFeeder> sr, int bytesPerCall, String xmlString) {
+    public AsyncReaderWrapperForByteBuffer(AsyncXMLStreamReader<AsyncByteBufferFeeder> sr, int bytesPerCall,
+                                           String xmlString) {
         _streamReader = sr;
         _bytesPerFeed = bytesPerCall;
         try {

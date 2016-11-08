@@ -10,12 +10,18 @@ import java.io.InputStream;
 
 public class TestBasicStaxParsing {
 
+    public static void main(String[] args) throws Exception {
+        (new TestBasicStaxParsing()).execute("test.xml");
+    }
+
     private void execute(String xmlFileName) throws Exception {
 
         //InputStream xmlInputStream = getClass().getResourceAsStream(xmlFileName);
         InputStream xmlInputStream = new FileInputStream(xmlFileName);
         //Load Aalto's StAX parser factory
-        XMLInputFactory2 xmlInputFactory = (XMLInputFactory2) XMLInputFactory.newFactory("javax.xml.stream.XMLInputFactory", this.getClass().getClassLoader());
+        XMLInputFactory2 xmlInputFactory =
+                (XMLInputFactory2) XMLInputFactory.newFactory("javax.xml.stream.XMLInputFactory",
+                        this.getClass().getClassLoader());
         //XMLInputFactory2 xmlInputFactory = (XMLInputFactory2)XMLInputFactory.newInstance();
         XMLStreamReader2 xmlStreamReader = (XMLStreamReader2) xmlInputFactory.createXMLStreamReader(xmlInputStream);
         while (xmlStreamReader.hasNext()) {
@@ -36,10 +42,6 @@ public class TestBasicStaxParsing {
             }
         }
 
-    }
-
-    public static void main(String[] args) throws Exception {
-        (new TestBasicStaxParsing()).execute("test.xml");
     }
 
 }
